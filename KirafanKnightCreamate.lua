@@ -39,7 +39,7 @@ function Kirafan4.TurnKnCreamate(c)
 	c:RegisterEffect(e1)
 end
 function Kirafan4.TurnKncon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
+	return Duel.GetTurnPlayer()~=tp
 end
 function Kirafan4.TurnKntg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
