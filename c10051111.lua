@@ -12,4 +12,6 @@ function s.initial_effect(c)
 	Kirafan.AttackCreaMainCharacter(c)
 	Kirafan.ZeroBattleDamageMainCharacter(c)
 	Kirafan.NoBattleTargetMainCharacter(c)
+	Kirafan.LimitBattleEffectMainCharacter(c)
+	Kirafan.Limit10HandMainCharacter(c)
 end

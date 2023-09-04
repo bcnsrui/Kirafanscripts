@@ -22,12 +22,16 @@ function Kirafan.DuelStartfilter(c)
 end
 function Kirafan.DuelStartop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
+	local sg=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	local g=Duel.SelectMatchingCard(tp,Kirafan.DuelStartfilter,tp,LOCATION_EXTRA,0,4,4,c)
 	if Duel.IsTurnPlayer(tp) then
 	Duel.MoveToField(c,tp,tp,LOCATION_EMZONE,POS_FACEUP_ATTACK,true)
 	Duel.Overlay(c,g,true)
-	Duel.Draw(tp,3,REASON_RULE)
+	Duel.SendtoDeck(sg,nil,SEQ_DECKSHUFFLE,REASON_RULE)
+	Duel.Draw(tp,5,REASON_RULE)
 	else Duel.MoveToField(c,tp,tp,LOCATION_EMZONE,POS_FACEUP_DEFENSE,true)
+	Duel.SendtoDeck(sg,nil,SEQ_DECKSHUFFLE,REASON_RULE)
+	Duel.Draw(tp,2,REASON_RULE)
 	Duel.Overlay(c,g,true)	end
 end
 
@@ -48,7 +52,7 @@ function Kirafan.NoSummonMainCharacter(c)
 	c:RegisterEffect(e3)
 end
 
---통상 드로우 3장
+--통상 드로우는 서로 3장
 function Kirafan.ThreeDrawMainCharacter(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -58,6 +62,18 @@ function Kirafan.ThreeDrawMainCharacter(c)
 	e1:SetTargetRange(1,0)
 	e1:SetValue(3)
 	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetCategory(CATEGORY_DRAW)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetCode(EVENT_PHASE+PHASE_DRAW)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetRange(LOCATION_EMZONE)
+	e2:SetCountLimit(1)
+	e2:SetOperation(Kirafan.drawop)
+	c:RegisterEffect(e2)
+end
+function Kirafan.drawop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Draw(1-tp,3,REASON_RULE)
 end
 
 --전투로 파괴되지 않는다
@@ -208,9 +224,13 @@ function Kirafan.BattleEffecttg(e,tp,eg,ep,ev,re,r,rp,chk)
     Duel.SetChainLimit(aux.FALSE)
 end
 
-
-
-
-
-
-
+--패 매수 제한은 10장
+function Kirafan.Limit10HandMainCharacter(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_HAND_LIMIT)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetRange(LOCATION_EMZONE)
+	e1:SetTargetRange(1,0)
+	e1:SetValue(10)
+	c:RegisterEffect(e1)
+end

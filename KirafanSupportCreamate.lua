@@ -88,13 +88,9 @@ function Kirafan3.TurnSpCreamate(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetRange(LOCATION_SZONE)
 	e1:SetCountLimit(1)
-	e1:SetCondition(Kirafan3.TurnSpcon)
 	e1:SetTarget(Kirafan3.TurnSptg)
 	e1:SetOperation(Kirafan3.TurnSpop)
 	c:RegisterEffect(e1)
-end
-function Kirafan3.TurnSpcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnPlayer()==tp
 end
 function Kirafan3.TurnSptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return true end
