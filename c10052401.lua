@@ -33,7 +33,7 @@ function s.target2(e,c)
 	return e:GetHandler():GetColumnGroup():IsContains(c) and c:IsAttribute(e:GetHandler():GetAttribute())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCurrentPhase()==PHASE_BATTLE_STEP and Duel.GetCurrentChain()<3
+	return Duel.IsBattlePhase() and Duel.GetCurrentChain()<3
 end
 function s.cfilter(c)
 	return c:IsAbleToRemoveAsCost()
