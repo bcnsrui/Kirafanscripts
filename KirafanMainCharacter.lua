@@ -226,6 +226,7 @@ end
 
 --패 매수 제한은 10장
 function Kirafan.Limit10HandMainCharacter(c)
+    local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetCode(EFFECT_HAND_LIMIT)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
