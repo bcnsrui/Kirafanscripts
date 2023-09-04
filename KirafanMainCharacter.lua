@@ -59,8 +59,8 @@ function Kirafan.ThreeDrawMainCharacter(c)
 	e1:SetCode(EFFECT_DRAW_COUNT)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
 	e1:SetRange(LOCATION_EMZONE)
-	e1:SetTargetRange(1,0)
-	e1:SetValue(3)
+	e1:SetTargetRange(1,1)
+	e1:SetValue(0)
 	c:RegisterEffect(e1)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DRAW)
@@ -73,7 +73,7 @@ function Kirafan.ThreeDrawMainCharacter(c)
 	c:RegisterEffect(e2)
 end
 function Kirafan.drawop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Draw(1-tp,3,REASON_RULE)
+	Duel.Draw(tp,3,REASON_RULE)
 end
 
 --전투로 파괴되지 않는다
